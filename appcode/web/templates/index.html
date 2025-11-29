@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Johney LLM Hub</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <div id="chat-container">
+      <h1>Johney's LLM Hub</h1>
+      <div class="provider-group">
+        <label>
+          <input type="radio" name="provider" value="openai" checked />
+          ChatGPT
+        </label>
+        <label>
+          <input type="radio" name="provider" value="gemini" />
+          Gemini
+        </label>
+        <label>
+          <input type="radio" name="provider" value="perplexity" />
+          Perplexity
+        </label>
+      </div>
+      <div class="status">
+        Conversation ID: <span id="conv-id">new</span>
+      </div>
+      <div id="messages"></div>
+      <div id="input-area">
+        <textarea id="prompt" placeholder="Type your message here..."></textarea>
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

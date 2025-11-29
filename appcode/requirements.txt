@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+openai
+google-cloud-firestore
+PyYAML

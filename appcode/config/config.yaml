@@ -1,0 +1,15 @@
+app:
+  project_id: "johneysadminproject"
+  firestore_collection: "llmhub-messages"
+
+models:
+  openai: "gpt-4.1-mini"
+  perplexity: "sonar"
+  gemini: "gemini-2.5-flash"
+
+history:
+  max_messages: 30
+
+features:
+  enable_gemini: false
+  enable_perplexity: false

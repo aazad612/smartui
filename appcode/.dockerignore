@@ -1,0 +1,22 @@
+# Ignore Terraform & infra
+infra/
+*.tfstate
+*.tfstate.backup
+
+# Ignore local config
+config/
+*.yaml
+
+# Ignore git
+.git
+.gitignore
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS cruft
+.DS_Store
+
+# Docs
+README.md
