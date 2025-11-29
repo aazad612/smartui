@@ -20,6 +20,3 @@ enabled_apis = [
   "secretmanager.googleapis.com",
   "aiplatform.googleapis.com"
 ]
-
-
-
