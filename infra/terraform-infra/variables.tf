@@ -27,3 +27,15 @@ variable "firestore_region" {
   description = "Region for Firestore. Must be a valid Firestore region (ex: us-central1, us-east1)"
   type        = string
 }
+
+variable "vertex_location" {
+  type        = string
+  description = "Vertex AI region"
+  default     = "us-central1"
+}
+
+variable "vertex_model_id" {
+  type        = string
+  description = "Vertex AI model name"
+  default     = "gemini-1.5-pro" # or whatever your old agent used
+}

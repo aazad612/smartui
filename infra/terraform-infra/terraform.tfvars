@@ -18,5 +18,9 @@ enabled_apis = [
   "cloudbuild.googleapis.com",
   "iam.googleapis.com",
   "secretmanager.googleapis.com",
-  "aiplatform.googleapis.com"
+  "aiplatform.googleapis.com",
+  "generativelanguage.googleapis.com"
 ]
+
+vertex_location = "us-central1"
+vertex_model_id = "gemini-1.5-pro"

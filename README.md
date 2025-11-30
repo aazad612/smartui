@@ -1,69 +1,28 @@
-# Johney LLM Hub (Regenerated)
+# Johney Agentic LLM Hub 
 
-Cloud Run-hosted web UI to talk to OpenAI, Perplexity, and Gemini,
-with all conversations stored centrally in Firestore.
+I extensively use OpenAI, Perplexity, Gemini, and using them through the UI and not being able to share the info even with the same LLM is very frustrating. Its evolving at the moment and things are pretty fluid. 
 
-## Structure
+# Milestone 0 - Cloud Run interface
+If you have a use case for building a CloudRun web app using rest APIs this one is highly reusable by design. currently on hold.
 
-- `config/config.yaml` – app configuration.
-- `app/` – FastAPI backend.
-- `web/templates/index.html` – HTML UI.
-- `web/static/css/styles.css` – styles.
-- `web/static/js/app.js` – frontend logic.
-- `docker/Dockerfile` – container image for Cloud Run.
-- `infra/terraform-infra` – infra layer (APIs, Artifact Registry, SA, IAM).
-- `infra/terraform-app` – app layer (Cloud Run service + public IAM).
+# Milestone 1 - Gemini Agent sending tasks to Notion
+First concrete spot I have reached is building an agent with Google's Agent Deployment Kit to send my tasks into a master notion database. Working with Notion programmatically is painful and very inflexible but the human interfaces are great to work with. 
 
-## Terraform – Infra Layer
+## How to creation notion database 
+./notionpy/createdb.py - uses 2022 version
 
-```bash
-cd infra/terraform-infra
-cp terraform.tfvars.example terraform.tfvars
-# edit: project_id, region, service_name if needed
-terraform init
-terraform apply
-```
+## Agent code
+./adk/agents/agent.py - working version 
+- list_tasks
+- create_task
+- update_task
+- delete_task 
+- notion_prompt.yaml - modify to your needs as this one is very specify to my life. 
 
-This will:
-- Enable required APIs.
-- Create Artifact Registry repo `llm-hub` in the given region.
-- Create Cloud Run service account `llm-hub-ui-sa`.
-- Grant `roles/datastore.user` on the project to that SA.
+# Milestone 2 - Gemini Agent updating Google Drive artifacts 
+# Milestone 3 - Centralizing prompts and responses into a Firestore database
 
-## Build Image
 
-Build and push the image to Artifact Registry (keeping tag in sync with `image_tag` in app tfvars):
 
-```bash
-cd /path/to/llm-hub-ui-regenerated
 
-gcloud builds submit   --region=us-central1   --tag us-central1-docker.pkg.dev/johneysadminproject/llm-hub/llm-hub-ui:v1   --file docker/Dockerfile .
-```
 
-## Terraform – App Layer
-
-```bash
-cd infra/terraform-app
-cp terraform.tfvars.example terraform.tfvars
-# edit: project_id, region, service_name, image_tag if needed
-terraform init
-terraform apply
-```
-
-This will:
-- Create or update the Cloud Run v2 service.
-- Use the image from Artifact Registry.
-- Make the service publicly invokable (`roles/run.invoker` to `allUsers`).
-
-## Local Development
-
-```bash
-pip install -r requirements.txt
-export GCP_PROJECT_ID="johneysadminproject"
-export OPENAI_API_KEY="..."
-export PPLX_API_KEY="..."
-export GEMINI_API_KEY="..."
-uvicorn app.main:app --reload
-```
-
-Then open http://127.0.0.1:8000/

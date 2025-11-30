@@ -19,6 +19,16 @@ resource "google_cloud_run_v2_service" "app" {
       }
 
       env {
+        name = "NOTION_API_KEY"
+        value_source {
+          secret_key_ref {
+            secret  = "${var.app_name}-notion-api-key"
+            version = "latest"
+          }
+        }
+      }
+      
+      env {
         name  = "GCP_PROJECT_ID"
         value = var.project_id
       }
